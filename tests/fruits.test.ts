@@ -6,14 +6,13 @@ const api = supertest(app)
 describe('GET /fruits', () => {
   it('should return all fruits', async () => {
     const body = {
-      id: 1,
       name: 'manga',
       price: 1200
     }
     await api.post('/fruits').send(body)
     const result = await api.get('/fruits')
     expect(result.status).toEqual(200)
-    expect(result.body).toEqual([body])
+    expect(result.body).toEqual([{ ...body, id: 1 }])
   })
   it('should return a fruit given an id', async () => {
     const body = {
